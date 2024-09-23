@@ -6,7 +6,7 @@ public class CreateTaskDto
     public string Description { get; set; }
     public bool IsCompleted { get; set; }
 }
-public class CheckMarkDto
+public class CheckTaskDto
 {
     public int Id { get; set; }
     public bool ISCompleted { get; set; }
