@@ -16,6 +16,9 @@ public class TaskMapping : IEntityTypeConfiguration<Task>
         builder.Property(i => i.IsCompleted)
             .HasDefaultValue(false).IsRequired();
 
+        builder.Property(i => i.Description)
+            .IsRequired();
+
         builder.Property(i => i.CreationTime)
             .IsRequired();
     }
