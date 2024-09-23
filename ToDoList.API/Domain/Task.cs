@@ -1,4 +1,6 @@
-﻿namespace ToDoList.API.Domain;
+﻿using System;
+
+namespace ToDoList.API.Domain;
 
 public class Task
 {
