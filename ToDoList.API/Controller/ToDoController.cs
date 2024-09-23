@@ -25,6 +25,7 @@ public class ToDoController : ControllerBase
     public IActionResult GetAll()
     {
         List<GetAllTask> tasks = _context.Tasks
+            .OrderByDescending(i => i.CreationTime)
             .Select(i => new GetAllTask
             {
                 Title = i.Title,
@@ -95,12 +96,27 @@ public class ToDoController : ControllerBase
 
         if(task.IsCompleted == false)
         {
-            return BadRequest("already unmarked");
+            return BadRequest("already unchecked");
         }
       
         task.IsCompleted = false;
 
         _context.Tasks.Update(task);
+        _context.SaveChanges();
+
+        return NoContent();
+    }
+    [HttpDelete("{id}")]
+    public IActionResult DeleteTask(int id)
+    {
+        var task = _context.Tasks.Where(i => i.Id == id).FirstOrDefault();
+       
+        if(task == null)
+        {
+            return NotFound("Task not found");
+        }
+
+        _context.Tasks.Remove(task);
         _context.SaveChanges();
 
         return NoContent();
