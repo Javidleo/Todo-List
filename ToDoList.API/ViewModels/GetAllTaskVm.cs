@@ -4,7 +4,7 @@ using System.Data;
 
 namespace ToDoList.API.ViewModels;
 
-public class GetAllTask
+public class GetAllTaskVm
 {
     public string Title{ get; set; }
     public string Description{ get; set; }

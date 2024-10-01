@@ -18,15 +18,15 @@ public class ToDoController : ControllerBase
 
     public ToDoController(AppDbContext context)
     {
-        _context = context;
+        _context = context; 
     }
 
     [HttpGet]
     public IActionResult GetAll()
     {
-        List<GetAllTask> tasks = _context.Tasks
+        List<GetAllTaskVm> tasks = _context.Tasks
             .OrderByDescending(i => i.CreationTime)
-            .Select(i => new GetAllTask
+            .Select(i => new GetAllTaskVm
             {
                 Title = i.Title,
                 Description = i.Description,
@@ -78,6 +78,7 @@ public class ToDoController : ControllerBase
             return BadRequest("already checked");
         }
 
+        task.IsCompleted = true;
         _context.Tasks.Update(task);
         _context.SaveChanges();
 
